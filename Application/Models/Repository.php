@@ -2,24 +2,28 @@
 
 namespace Application\Models;
 
+use Exception;
+
 class Repository
 {
-    protected $db;
+  protected $db;
 
-    function __construct() {
-        $this->db = $this->connexion();
+  function __construct()
+  {
+    $this->db = $this->connexion();
+  }
+
+  protected function connexion()
+  {
+    try {
+
+      if (DB_DRIVER == 'sqlite') $db = new \PDO('sqlite:' . DB_PATH);
+      else $db = new \PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PWD);
+
+    } catch (Exception $e) {
+      print "Erreur de connexion à la base de données : " . $e->getMessage() . "<br/>";
+      die();
     }
-
-    protected function connexion()
-    {
-        try {
-
-            $db = new \PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8', DB_USER, DB_PWD);
-
-        } catch (PDOException $e) {
-            print "Erreur !: " . $e->getMessage() . "<br/>";
-            die();
-        }
-        return $db;
-    }
+    return $db;
+  }
 }

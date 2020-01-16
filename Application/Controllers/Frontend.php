@@ -17,10 +17,12 @@ Class Frontend {
     {
         //Exemple de récupération d'une page en base de données
         $page_repository = new \Application\Models\PageRepository(); //on instancie un repository
-        $page = new \Application\Models\Page( $page_repository->read('accueil') ); //on instancie un modèle page avec les données récupérées par le repository
+        $donnees_page_accueil = $page_repository->read('accueil'); //on récupère les données depuis la base de données
 
-        //On passe le modèle à la vue
-        $this->view->setVar('page', $page);
+        $page_accueil = new \Application\Models\Page( $donnees_page_accueil ); //on instancie un objet page (Un modèle) avec les données récupérées par le repository
+
+        //On passe notre objet à la vue. Dans la fichier de la vue, on pourra utiliser la variable $page
+        $this->view->setVar('page', $page_accueil);
 
 
         //Autre exemple pour passer des données à la View
@@ -48,9 +50,11 @@ Class Frontend {
      */
     function page($name = "accueil")
     {
-        $page = new \Application\Models\Page([]);
-        $this->view->setVar('page', $page);
+      if(isset($_GET['name']) and $_GET['name'] != "") $name = $_GET['name'];
 
+        $page = new \Application\Models\Page([]);
+
+        $this->view->setVar('page', $page);
         $this->view->setVar('view', 'frontend/'.$name);
 
         //on appelle la template, qui va utiliser la view que l'on a choisie

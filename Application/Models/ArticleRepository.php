@@ -6,23 +6,34 @@ require_once("Repository.php");
 
 class ArticleRepository extends Repository
 {
-    function create() {
+  function create()
+  {
+  }
 
+  function read($name)
+  {
+    $statement = $this->db->prepare('SELECT * FROM posts WHERE post_type="article" AND post_name="' . $name . '"');
+
+    try {
+
+      $statement->execute();
+    } catch (PDOException $e) {
+      echo "Statement failed: " . $e->getMessage();
+      return false;
     }
 
-    function read() {
+    return $statement->fetch();
+  }
 
-    }
+  function update()
+  {
+  }
 
-    function update() {
+  function delete()
+  {
+  }
 
-    }
-
-    function delete() {
-
-    }
-
-    function all($categories = array()) {
-        
-    }
+  function all($categories = array())
+  {
+  }
 }

@@ -6,26 +6,51 @@ require_once("Repository.php");
 
 class PageRepository extends Repository
 {
-    function create() {
+  /**
+   * Crée une page dans la base de données
+   */
+  function create()
+  {
+  }
 
+  /**
+   * Récupère une page dans la base de données
+   */
+  function read($name)
+  {
+    $statement = $this->db->prepare('SELECT * from posts WHERE post_type="page" and post_name="'.$name.'"');
+    
+    try {
+
+      $statement->execute();
+    
+    } catch (PDOException $e) {
+      echo "Statement failed: " . $e->getMessage();
+      return false;
     }
 
-    /**
-     * Récupère unage page dans la base de données
-     */
-    function read($name) {
-        return $this->db->query('SELECT * FROM posts WHERE post_type="page" AND post_name="'.$name.'"')->fetch(\PDO::FETCH_ASSOC);
-    }
+    return $statement->fetch();
+  }
 
-    function update($name) {
+  /**
+   * Met une page à jour dans la base de données
+   */
+  function update($name)
+  {
+  }
 
-    }
+  /**
+   * Efface une page de la base de données
+   */
+  function delete($name)
+  {
+  }
 
-    function delete($name) {
-
-    }
-
-    function all($categories = array()) {
-        
-    }
+  /**
+   * Récupère une liste de pages depuis la base de données
+   * @param $categories la catégorie à séléctionner
+   */
+  function all($categories = array())
+  {
+  }
 }

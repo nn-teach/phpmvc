@@ -26,8 +26,8 @@
     <?php include 'article-accueil.php'; ?>
 
     <?php
-    //Pour récupérer les variables passées dans le controleur: 
-    print_r($this->data['posts']);
+    //Pour récupérer les variables passées dans le contrôleur: 
+    // print_r($this->data['posts']);
     ?>
 
 </div>
