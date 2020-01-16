@@ -1,6 +1,6 @@
 # phpmvc
 
-Blog Basique en PHP avec une architecture MVC simplififée
+Blog basique en PHP avec une architecture MVC simplififée
 
 # Installation
 
@@ -18,6 +18,7 @@ Tant que cette commande est active, l'application sera disponible à l'url http:
 
 # Todo
 
+- Suivez le chemin de la requête HTTP (-> index.php -> Bootstrap.php -> Frontend.php -> etc.) pour comprendre le fonctionnement de l'application
 - Compléter Frontend.php, les modèles et les vues
 - Créer une interface d'administration (Avec plusieurs contrôleurs pour gérer les différents modèles)
 
