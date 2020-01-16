@@ -14,8 +14,13 @@
         <li class="menu-text"><a href="<?php echo BASE_URL; ?>">Accueil</a></li>
         <li><a href="<?php echo BASE_URL; ?>?action=articles&category=news">News</a></li>
         <li><a href="<?php echo BASE_URL; ?>?action=articles&category=blog">Blog</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="<?php echo BASE_URL; ?>?action=contact">Contact</a></li>
         <li><a href="<?php echo BASE_URL; ?>?action=page&name=mentions-legales">Mentions légales</a></li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu">
+        <li><a href="<?php echo BASE_URL; ?>dbadmin">DB Admin</a></li>
         </ul>
     </div>
 </div>
