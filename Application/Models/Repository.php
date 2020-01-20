@@ -4,7 +4,7 @@ namespace Application\Models;
 
 use Exception;
 
-class Repository
+abstract class Repository
 {
   protected $db;
 
