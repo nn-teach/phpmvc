@@ -21,13 +21,19 @@
 
     <hr>
 
-    <?php include 'article-accueil.php'; ?>
-
-    <?php include 'article-accueil.php'; ?>
-
     <?php
-    //Pour récupérer les variables passées dans le contrôleur: 
+    
+    //ici, on inclut deux fois un fichier contenant du HTML brut pour l'exemple!
+    //mais il faudra ici réaliser une boucle sur les informations récupérées depuis la base de données (à chaque tour de boucle on inclut une fois le fichier article-accueil.php)
+
+    //Pour récupérer les variables passées dans le contrôleur, et donc les données recupérées depuis la BDD, on utilisera $this->data['posts']
     // print_r($this->data['posts']);
+
+    //il faudra modifier le fichier article-acceuil.php pour qu'il utilise les données de la BDD et pas du HTML brut
+
+    include 'article-accueil.php'; 
+    include 'article-accueil.php';
+
     ?>
 
 </div>
