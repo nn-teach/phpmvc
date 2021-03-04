@@ -15,6 +15,7 @@
         <li><a href="<?php echo BASE_URL; ?>?action=articles&category=news">News</a></li>
         <li><a href="<?php echo BASE_URL; ?>?action=articles&category=blog">Blog</a></li>
         <li><a href="<?php echo BASE_URL; ?>?action=contact">Contact</a></li>
+        <li><a href="<?php echo BASE_URL; ?>?action=newsletter">Newsletter</a></li>
         <li><a href="<?php echo BASE_URL; ?>?action=page&name=mentions-legales">Mentions légales</a></li>
         </ul>
     </div>
@@ -46,15 +47,11 @@ else include 'frontend/not-found.php';
 <br/>
 <br/>
 
-<div class="callout primary">
-    <div class="row column text-center">
-    <h2 class="subheader">Ici un formulaire pour s'enregistrer à la newsletter ce serait sympa</h2>
-    </div>
-</div>
+<?php if(!isset($_GET['action']) or $_GET['action']!= "newsletter") include 'frontend/newsletter/form.php'; ?>
 
 <div class="callout ">
     <div class="row column text-center">
-    <h3>Et puis ici un footer par exemple</h3>
+    <h3>2033 © Pierre</h3>
     </div>
 </div>
 

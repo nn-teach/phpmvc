@@ -2,6 +2,8 @@
 
 namespace Application\Controllers;
 
+use Application\Models\NewsletterRepository;
+
 Class Frontend {
 
     public $view;
@@ -36,7 +38,7 @@ Class Frontend {
 
         $posts_array = array(); 
         foreach($donnees_posts as $donnees_post) {
-          $posts_array[] = new \Application\Models\Article($donnees_post);
+            $posts_array[] = new \Application\Models\Article($donnees_post);
         } 
         // print_r($posts_array[0]->title());
         // die;
@@ -49,7 +51,7 @@ Class Frontend {
         //on appelle la template, qui va utiliser la view que l'on a choisie
         //La fonction render utilise template.php par défaut, mais on peut lui spécifier une autre template en paramètre
         echo $this->view->render();
-    
+        
     }
 
     /**
@@ -58,7 +60,7 @@ Class Frontend {
      */
     function page($name = "accueil")
     {
-      if(isset($_GET['name']) and $_GET['name'] != "") $name = $_GET['name'];
+        if(isset($_GET['name']) and $_GET['name'] != "") $name = $_GET['name'];
 
         $page = new \Application\Models\Page([]);
 
@@ -145,10 +147,34 @@ Class Frontend {
      */
     function newsletter() {
 
-        /***********************************************/
-        /***********************************************/
+      //Côté Modèles :
+      // 1) ajouter une nouvelle entrée au menu qui pointe vers ?action=newsletter
+      // 2) coder une nouvelle classe Repository : NewsletterRepository
+      // 3) coder une nouvelle classe : Newsletter
 
-        //on appelle la template, qui va utiliser la view que l'on a choisie
-        echo $this->view->render();
+      //Côté Contrôleur :
+      // 4) si $_POST est vide, on affiche le formulaire
+        // 4.2 ) Coder une nouvelle template avec le formulaire (méthode post, il doit pointer vers ?action=newsletter)
+
+      // 5) si $POST n'est pas vide, on sauvegarde dans la base de données :
+        // 5.1) on crée un objet Newsletter avec la valeur de $_POST
+        // 5.2) on crée un objet NewsletterRepository
+        // 5.3) on appelle la fonction create($newsletter) du NewsletterRepository
+        // 5.4) la fonction create($newsletter) du NewsletterRepository doit renvoyer dernier #ID créé en base de données
+        // 5.5) Si le dernier ID est différent de 0, alors la création s'est bien passée, on peut afficher une template différente avec un message de succès
+
+      $id_inserted = 0;
+
+      if(isset($_POST['email']) and $_POST['email'] != "") {
+        $newsletter = new \Application\Models\Newsletter($_POST);
+
+        $newsletterRepository = new NewsletterRepository();
+        $id_inserted = $newsletterRepository->create($newsletter);
+      }
+
+      if($id_inserted == 0) $this->view->setVar('view', 'frontend/newsletter/index');
+      else $this->view->setVar('view', 'frontend/newsletter/success');
+
+      echo $this->view->render();
     }
 }
