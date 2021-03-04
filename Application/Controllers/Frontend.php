@@ -137,6 +137,28 @@ Class Frontend {
         //On doit appeler le formulaire s'il n'y a pas de $_POST
         //S'il y a du $_POST, on doit le vérifier, l'enregistrer en base de données puis afficher un message
         /***********************************************/
+        $id_inserted = 0;
+
+        if (!empty($_POST)) {
+            if(
+                isset($_POST['name']) and $_POST['name'] != ""
+                /* and isset($_POST['email']) and $_POST['email'] != "" */
+                and isset($_POST['message']) and $_POST['message'] != ""
+            ) {   
+                $contact = new \Application\Models\Contact($_POST);
+
+                $contactRepository = new \Application\Models\ContactRepository();
+                $id_inserted = $contactRepository->create($contact);
+            }
+            else {
+                $this->view->setVar('errors', "Une erreur s'est produite");
+            }
+        }
+
+        $this->view->setVar('id_message', $id_inserted);
+        
+        if($id_inserted == 0) $this->view->setVar('view', 'frontend/contact/index');
+        else $this->view->setVar('view', 'frontend/contact/success');
 
         //on appelle la template, qui va utiliser la view que l'on a choisie
         echo $this->view->render();
