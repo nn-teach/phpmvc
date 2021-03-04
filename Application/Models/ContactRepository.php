@@ -6,6 +6,29 @@ namespace Application\Models;
 
 class ContactRepository extends Repository
 {
+    
+    function all($category = null)
+    {
+        $query = 'SELECT * FROM contact';
+        
+        $statement = $this->db->prepare($query);
+        /* $statement = $this->db->prepare('SELECT * FROM posts WHERE post_type="article"'); */
+
+        try {
+
+            $statement->execute();
+            
+        } catch (\PDOException $e) {
+            echo "Statement failed: " . $e->getMessage();
+            return false;
+        }
+        // var_dump($statement->fetchAll(\PDO::FETCH_ASSOC));
+        // die;
+
+        // \PDO::FETCH_ASSOC demande un résultat sous forme de tableau associatif
+        return $statement->fetchAll(\PDO::FETCH_ASSOC); 
+    }
+    
     function create($contactObject)
     {
         
