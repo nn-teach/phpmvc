@@ -5,15 +5,30 @@ session_start(); //démarre une session PHP, pour que l'on puisse utiliser $_SES
 
 //récupère le paramètre "action" de l'url qui sera utilisé par le contrôleur
 if (!isset($_GET['action'])) {
-  $action = "accueil";
+    $action = "accueil";
 } else {
-  $action = $_GET['action'];
-} 
+    $action = $_GET['action'];
+}
 
-$controller = new Application\Controllers\Frontend(); //Crée un objet Frontend, qui est le contrôleur de base de l'application
+
+if (isset($_GET['admin'])) { // Je suis dans l'admin
+    if (isset($_GET['type'])) { // Est-ce que je recherche un controller particulier
+        $controller_name = 'Application\Controllers\Admin\\'.ucfirst($_GET["type"]);
+        if (class_exists($controller_name)) {
+            $controller = new $controller_name();
+        }
+        else {
+            echo "Le controller ".$controller_name. " n'existe pas";die;
+        }
+    } else { //Sinon j'ai un controller backend par défaut
+        $controller = new Application\Controllers\Admin\Backend(); //Crée un objet Frontend, qui est le contrôleur de base de l'application
+    } 
+} else {
+    $controller = new Application\Controllers\Frontend(); //Crée un objet Frontend, qui est le contrôleur de base de l'application
+}
 
 if (is_callable(array($controller, $action))) { //on vérifie si la méthode "$action" existe dans le contrôleur "$controller"
-  $controller->$action(); //si oui, on l'appelle
+    $controller->$action(); //si oui, on l'appelle
 } else {
-  $controller->index(); //si non, on appelle la méthode index(), ou une méthode d'erreur par exemple
+    $controller->index(); //si non, on appelle la méthode index(), ou une méthode d'erreur par exemple
 }

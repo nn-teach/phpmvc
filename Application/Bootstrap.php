@@ -47,6 +47,10 @@ function autoload($class)
     //on vérifie que le fichier existe et si oui on l'inclut
     if (is_file('Application/Controllers/'.$class . '.php')) {
         require_once 'Application/Controllers/'.$class . '.php';
+    }
+    //on vérifie que le fichier existe et si oui on l'inclut
+    if (is_file('Application/Controllers/Admin/'.$class . '.php')) {
+        require_once 'Application/Controllers/Admin/'.$class . '.php';
     } 
 }
 spl_autoload_register('autoload'); // On enregistre la fonction en autoload pour qu'elle soit appelée dès qu'on essaie d'instancier une classe non déclarée.
