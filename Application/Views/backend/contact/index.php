@@ -29,7 +29,9 @@
     {
         echo "<tr>";
         echo "<td>";
+        echo '<a href="?admin=true&type=contact&action=edit&id='.$contact->id().'">';
         echo $contact->id();
+        echo "</a>";
         echo "</td>";
         echo "<td>";
         echo $contact->name();

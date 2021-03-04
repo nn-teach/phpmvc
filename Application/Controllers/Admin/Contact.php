@@ -35,9 +35,14 @@ Class Contact {
 
     }
     function create() {
-        echo "Je suis dans mon controller article";
+        echo "Je suis dans mon controller contact";
         echo " et je suis dans la méthode create";
     }
 
+    function edit() {
+        echo "Je suis dans mon controller contact";
+        echo " et je suis dans la méthode edit";
+        echo "j'édite le contact numéro: ".$_GET['id'];
+    }
 
 }
