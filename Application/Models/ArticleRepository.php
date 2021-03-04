@@ -6,49 +6,53 @@ require_once("Repository.php");
 
 class ArticleRepository extends Repository
 {
-  function create()
-  {
-  }
-
-  function read($name)
-  {
-    $statement = $this->db->prepare('SELECT * FROM posts WHERE post_type="article" AND post_name="' . $name . '"');
-
-    try {
-
-      $statement->execute();
-    } catch (\PDOException $e) {
-      echo "Statement failed: " . $e->getMessage();
-      return false;
+    function create()
+    {
     }
 
-    return $statement->fetch();
-  }
+    function read($name)
+    {
+        $statement = $this->db->prepare('SELECT * FROM posts WHERE post_type="article" AND post_name="' . $name . '"');
 
-  function update()
-  {
-  }
+        try {
 
-  function delete()
-  {
-  }
+            $statement->execute();
+        } catch (\PDOException $e) {
+            echo "Statement failed: " . $e->getMessage();
+            return false;
+        }
 
-  function all($categories = array())
-  {
-    $statement = $this->db->prepare('SELECT * FROM posts WHERE post_type="article"');
-
-    try {
-
-      $statement->execute();
-      
-    } catch (\PDOException $e) {
-      echo "Statement failed: " . $e->getMessage();
-      return false;
+        return $statement->fetch();
     }
-    // var_dump($statement->fetchAll(\PDO::FETCH_ASSOC));
-    // die;
 
-    // \PDO::FETCH_ASSOC demande un résultat sous forme de tableau associatif
-    return $statement->fetchAll(\PDO::FETCH_ASSOC); 
-  }
+    function update()
+    {
+    }
+
+    function delete()
+    {
+    }
+
+    function all($category = null)
+    {
+        $query = 'SELECT * FROM posts WHERE post_type="article"';
+        if ($category != null) $query .= ' AND  post_category="'.$category.'"';
+        
+        $statement = $this->db->prepare($query);
+        /* $statement = $this->db->prepare('SELECT * FROM posts WHERE post_type="article"'); */
+
+        try {
+
+            $statement->execute();
+            
+        } catch (\PDOException $e) {
+            echo "Statement failed: " . $e->getMessage();
+            return false;
+        }
+        // var_dump($statement->fetchAll(\PDO::FETCH_ASSOC));
+        // die;
+
+        // \PDO::FETCH_ASSOC demande un résultat sous forme de tableau associatif
+        return $statement->fetchAll(\PDO::FETCH_ASSOC); 
+    }
 }

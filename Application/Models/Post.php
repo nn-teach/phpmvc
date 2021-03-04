@@ -26,4 +26,22 @@ abstract class Post
     function content() {
         return $this->content;
     }
+
+    function date() {
+        /* return $this->date; */
+        return date("d F Y à H:i", strtotime($this->date));
+    }
+
+    function name() {
+        return $this->name;
+    }
+
+    function author() {
+        $author_repository = new \Application\Models\AuthorRepository();
+        $donnees_author = $author_repository->read($this->author);
+        $author = new \Application\Models\Author($donnees_author);
+        /* print_r($author);die; */
+        return $author;
+    }
+
 }

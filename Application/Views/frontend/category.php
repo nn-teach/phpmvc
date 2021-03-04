@@ -1,27 +1,17 @@
-<?php
-$page = $this->data['page'];
-?>
+
 
 <div class="row medium-8 large-7 columns">
 
-    <h2>Titre: <?php echo $page->title(); ?></h2>
-
-    <h4>Contenu: </h4>
-
-    <?php echo $page->content(); ?>
-
-    <hr>
-
-    <h3>On est sur la view "accueil".php</h3>
+  <h2>Categorie: <?php echo $this->data['category']; ?></h2>
 
 </div>
-    
-    
+
+
 <div class="row medium-8 large-7 columns">
 
-    <h3>La liste d'articles devraient apparaitre en dessous sous cette forme : </h3>
+  <h3>La liste d'articles devraient apparaitre en dessous sous cette forme : </h3>
 
-    <hr>
+  <hr>
 
     <?php
     
@@ -35,8 +25,8 @@ $page = $this->data['page'];
 
     foreach($this->data['articles'] as $article)
     {
-      // echo $article->title()."<br/>";
-      include 'article-accueil.php'; 
+        // echo $article->title()."<br/>";
+        include 'article-accueil.php'; 
     }
 
 

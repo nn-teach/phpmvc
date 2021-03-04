@@ -74,12 +74,28 @@ Class Frontend {
      * @param String $category : Permet de trier les articles par catégorie
      */
     function articles($category = null) {
-
+        if (isset($_GET['category'])) {
+            $category = $_GET['category'];
+        }
+        $this->view->setVar('category', $category);
         /***********************************************/
         //À compléter
-        //On doit récupérer les articles depuis la base de données et les initialiser
-        //puis les passer à une view
+        //On doit récupérer l'article depuis la base de données puis l'initialiser
+        //puis le passer à une view
         /***********************************************/
+        $article_repository = new \Application\Models\ArticleRepository(); //on instancie un repository
+        $donnees_posts = $article_repository->all($category); //on récupère les données depuis la base de données
+
+        $posts_array = array(); 
+        foreach($donnees_posts as $donnees_post) {
+            $posts_array[] = new \Application\Models\Article($donnees_post);
+        } 
+        // print_r($posts_array[0]->title());
+        // die;
+        $this->view->setVar('articles', $posts_array);
+
+        //On donne le nom de la vue que l'on veut appeler
+        $this->view->setVar('view', 'frontend/category');
 
 
         //on appelle la template, qui va utiliser la view que l'on a choisie
@@ -92,14 +108,20 @@ Class Frontend {
      */
     function article($name = null) {
 
-        /***********************************************/
-        //À compléter
-        //On doit récupérer l'article depuis la base de données puis l'initialiser
-        //puis le passer à une view
-        /***********************************************/
+// 2) récupérer l'article qui correspond à $_GET['nom'] (Coder le repository si besoin)
+        $article_repository = new \Application\Models\ArticleRepository();
+        $donnees_article_accueil = $article_repository->read($_GET['name']);
 
+// 3) Créer un objet Article et l'hydrater avec les données récupérées précédemment
+        $article_accueil = new \Application\Models\Article( $donnees_article_accueil );
 
-        //on appelle la template, qui va utiliser la view que l'on a choisie
+        // 4) Passer l'objet Article à la vue
+        $this->view->setVar('article', $article_accueil);
+
+// 5) indiquer à la vue quelle template HTML il faut utiliser
+        $this->view->setVar('view', 'frontend/article');
+
+        // 6) vue->render
         echo $this->view->render();
     }
 
