@@ -1,1 +1,1 @@
-Inscription réussie ! Yeah !
+<p class="success">Inscription réussie ! Yeah !</p>
