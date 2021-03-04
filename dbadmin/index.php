@@ -44,7 +44,7 @@
 // Please see https://bitbucket.org/phpliteadmin/public/wiki/Configuration for more details
 
 //password to gain access (set an empty password to disable authentication completely)
-$password = 'admin';
+$password = 'dbadmin';
 
 //directory relative to this file to search for databases (if false, manually list databases in the $databases variable)
 $directory = './..';
@@ -419,6 +419,10 @@ $lang = array(
 	"help11_x" => "The maximum size of file uploads is determined by three PHP settings: <em>upload_max_filesize</em>, <em>post_max_size</em> and <em>memory_limit</em>. The smallest of these three limits the maximum size for file uploads. To upload larger files, adjust these values in your <em>php.ini</em> file."
 
 );
+
+//	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//	there is no reason for the average user to edit anything below this comment
+//	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //	there is no reason for the average user to edit anything below this comment
@@ -3848,6 +3852,7 @@ if(!$auth->isAuthorized())
 	echo "<div id='loginBox'>";
 	echo "<h1><span id='logo'>".PROJECT."</span> <span id='version'>v".VERSION."</span></h1>";
 	echo "<div style='padding:15px; text-align:center;'>";
+	echo "<h2>Mot de passe: dbadmin</h2>";
 	if (isset($_GET['failed']))
 		echo "<span class='warning'>".$lang['passwd_incorrect']."</span><br/><br/>";
 	echo $params->getForm();
