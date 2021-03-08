@@ -23,6 +23,13 @@ Class Article {
         }
         
         $this->view->setVar('articles', $articles_array);
+
+        if(
+            isset($_GET['status']) and $_GET['status'] == "success"
+            and isset($_GET['id']) and $_GET['id'] != ""
+        ) {
+            $this->view->setVar('id_article', $_GET['id']);
+        }
         
         //On donne le nom de la vue que l'on veut appeler
         $this->view->setVar('view', 'backend/article/index');
@@ -39,9 +46,9 @@ Class Article {
 
         if (!empty($_POST)) {
             if(
-                isset($_POST['title']) and $_POST['title'] != ""
+                isset($_POST['post_title']) and $_POST['post_title'] != ""
                 /* and isset($_POST['email']) and $_POST['email'] != "" */
-                and isset($_POST['content']) and $_POST['content'] != ""
+                and isset($_POST['post_content']) and $_POST['post_content'] != ""
             ) {   
                 $article = new \Application\Models\Article($_POST);
 
@@ -52,11 +59,14 @@ Class Article {
                 $this->view->setVar('errors', "Une erreur s'est produite");
             }
         }
-
-        $this->view->setVar('id_message', $id_inserted);
         
         if($id_inserted == 0) $this->view->setVar('view', 'backend/article/create');
-        else $this->view->setVar('view', 'backend/article/success');
+        else {
+            /* $this->view->setVar('view', 'backend/article/success'); */
+            $redirect_url = BASE_URL.'?admin=true&type=article&action=index&status=success&id='.$id_inserted;
+            header("Location: {$redirect_url}");
+            exit;
+        }
 
         //on appelle la template, qui va utiliser la view que l'on a choisie
         echo $this->view->render();

@@ -6,8 +6,26 @@ require_once("Repository.php");
 
 class ArticleRepository extends Repository
 {
-    function create()
+    function create($articleObject)
     {
+        $query = $this->db->prepare(
+            'INSERT INTO posts (post_title, post_content, post_author, post_status, post_category, post_date, post_type) VALUES (:title, :content, :author, :status, :category, CURRENT_DATE, "article")'
+        );
+        $query->bindValue(':title', $articleObject->title());
+        $query->bindValue(':content', $articleObject->content());
+        $query->bindValue(':author', $articleObject->author()->id());
+        $query->bindValue(':status', $articleObject->status());
+        $query->bindValue(':category', $articleObject->category());
+
+        
+        try {
+            $query->execute();
+        } catch (\Throwable $e) {
+            echo "Query failed: " . $e->getMessage();
+            return false;
+        }
+        
+        return $this->db->lastInsertId();
     }
 
     function read($name)

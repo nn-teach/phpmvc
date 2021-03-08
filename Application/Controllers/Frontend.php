@@ -141,9 +141,9 @@ Class Frontend {
 
         if (!empty($_POST)) {
             if(
-                isset($_POST['name']) and $_POST['name'] != ""
+                isset($_POST['contact_name']) and $_POST['contact_name'] != ""
                 /* and isset($_POST['email']) and $_POST['email'] != "" */
-                and isset($_POST['message']) and $_POST['message'] != ""
+                and isset($_POST['contact_message']) and $_POST['contact_message'] != ""
             ) {   
                 $contact = new \Application\Models\Contact($_POST);
 

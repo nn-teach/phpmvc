@@ -1,3 +1,15 @@
+<?php
+if (isset($this->data['id_article'])) {
+?>
+  <div class="callout primary">
+  <div class="row column text-center">
+    <p class="success">L'article <?php echo $this->data['id_article'] ?> a bien été ajouté<br/>
+    </p>
+    
+  </div>
+  </div>
+<?php } ?>
+
 <div class="row medium-8 large-7 columns">
 
   <h3>On est sur la view Admin - Article - Index</h3>

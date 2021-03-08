@@ -14,6 +14,9 @@ class Author
     }
 
     //Getter & Setters différent?
+    function id() {
+        return $this->id;
+    }
     function login() {
         return $this->login;
     }

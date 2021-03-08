@@ -52,4 +52,8 @@ abstract class Post
         return $this->category;
     }
 
+    function status() {
+        return $this->status;
+    }
+
 }
