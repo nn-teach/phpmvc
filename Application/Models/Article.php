@@ -13,6 +13,7 @@ class Article extends Post
         $this->author = isset($values['post_author']) ? $values['post_author'] : null;
         $this->date = isset($values['post_date']) ? $values['post_date'] : null;
         $this->name = isset($values['post_name']) ? $values['post_name'] : null;
+        $this->category = isset($values['post_category']) ? $values['post_category'] : null;
     }
 
     //Getter & Setters différent?

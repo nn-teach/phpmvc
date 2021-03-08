@@ -18,6 +18,10 @@ abstract class Post
     }
 
     //Getter & Setters
+
+    function id() {
+        return $this->id;
+    }
     
     function title() {
         return $this->title;
@@ -42,6 +46,10 @@ abstract class Post
         $author = new \Application\Models\Author($donnees_author);
         /* print_r($author);die; */
         return $author;
+    }
+
+    function category() {
+        return $this->category;
     }
 
 }
