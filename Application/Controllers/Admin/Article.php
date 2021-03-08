@@ -99,7 +99,8 @@ Class Article {
             $articleRepository = new \Application\Models\ArticleRepository();
             $articleRepository->delete($id);
 
-            $this->index();
+            $messages = ['status'=>'success','action'=>'delete','id'=>$id]; 
+            $this->index($messages);
         }
         else {
             echo "error";
