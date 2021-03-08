@@ -47,8 +47,21 @@ class ArticleRepository extends Repository
     {
     }
 
-    function delete()
+    
+    function delete($id)
     {
+        $query = 'DELETE FROM posts WHERE id="' . $id . '"';
+
+        $statement = $this->db->prepare($query);
+
+        try {
+
+            $statement->execute();
+        } catch (\PDOException $e) {
+            echo "Statement failed: " . $e->getMessage();
+            return false;
+        }
+
     }
 
     function all($category = null)
