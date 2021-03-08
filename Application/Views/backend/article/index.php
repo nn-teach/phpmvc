@@ -1,14 +1,6 @@
 <?php
-if (isset($this->data['id_article'])) {
+include dirname(__DIR__).'/message.php'; 
 ?>
-  <div class="callout primary">
-  <div class="row column text-center">
-    <p class="success">L'article <?php echo $this->data['id_article'] ?> a bien été ajouté<br/>
-    </p>
-    
-  </div>
-  </div>
-<?php } ?>
 
 <div class="row medium-8 large-7 columns">
 
@@ -63,12 +55,18 @@ if (isset($this->data['id_article'])) {
          echo "<td>";
          echo $article->date();
          echo "</td>";
+         echo "<td>";
+         echo '<a href="?admin=true&type=article&action=delete&id='.$article->id().'">';
+         echo "DELETE";
+         echo "</a>";
+         echo "</td>";
          echo "</tr>";
+         
      }
 
      ?>
 
     </tbody>
-  </table>
+     </table>
 
 </div>

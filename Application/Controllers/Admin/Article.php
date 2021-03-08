@@ -13,7 +13,7 @@ Class Article {
     /**
      * Affiche la page d'accueil
      */
-    function index()
+    function index($messages = null)
     {
         $article_repository = new \Application\Models\ArticleRepository(); //on instancie un repository
         $donnees_articles = $article_repository->all(); //on récupère les données depuis la base de données
@@ -23,13 +23,25 @@ Class Article {
         }
         
         $this->view->setVar('articles', $articles_array);
-
-        if(
-            isset($_GET['status']) and $_GET['status'] == "success"
-            and isset($_GET['id']) and $_GET['id'] != ""
-        ) {
-            $this->view->setVar('id_article', $_GET['id']);
-        }
+        if($messages) {
+            if (
+                isset($messages['status']) and $messages['status'] == "success"
+                and isset($messages['action']) and isset($messages['id'])
+            )
+            {
+                switch ($messages['action']) {
+                    case "create":
+                        $this->view->setVar('message', "L'article ".$messages['id']." a bien été ajouté");
+                        break;
+                    case "delete":
+                        $this->view->setVar('message', "L'article ".$messages['id']." a bien été supprimé");
+                        break;
+                    default:
+                        $this->view->setVar('message', "L'action a bien été effectuée");
+                        break;
+                }
+            }
+        }   
         
         //On donne le nom de la vue que l'on veut appeler
         $this->view->setVar('view', 'backend/article/index');
