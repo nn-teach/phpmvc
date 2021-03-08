@@ -21,7 +21,8 @@
         </ul>
     </div>
     <div class="top-bar-right">
-        <ul class="menu">
+      <ul class="menu">
+        <li><a href="<?php echo BASE_URL; ?>?admin=true">Admin</a></li>
         <li><a href="<?php echo BASE_URL; ?>dbadmin">DB Admin</a></li>
         </ul>
     </div>
