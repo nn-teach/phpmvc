@@ -22,20 +22,21 @@ if (isset($this->data['id_article'])) {
   <h3>Voici la liste des articles</h3>
   <a href="?admin=true&type=article&action=create">Créer un nouvel article</a>
 
-     <hr>
-     
-     <table>
-     <thead>
-     <tr>
-     <th>id</th>
-     <th>name</th>
-     <th>titre</th>
-     <th>auteur</th>
-     <th>categorie</th>     
-     <th>date</th>
-     </tr>
-     </thead>
-     <tbody>
+  <hr>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>titre</th>
+        <th>auteur</th>
+        <th>categorie</th>     
+        <th>date</th>
+        <th>actions</th>
+      </tr>
+    </thead>
+    <tbody>
 
      <?php
 
