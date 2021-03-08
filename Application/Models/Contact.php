@@ -12,10 +12,6 @@ class Contact
 
     function __construct($values) {
         $this->id = isset($values['id']) ? $values['id'] : null;
-        $this->name = isset($values['name']) ? $values['name'] : null;
-        $this->email = isset($values['email']) ? $values['email'] : null;
-        $this->message = isset($values['message']) ? $values['message'] : null;
-        $this->date = isset($values['date']) ? $values['date'] : null;
 
         $this->name = isset($values['contact_name']) ? $values['contact_name'] : null;
         $this->email = isset($values['contact_email']) ? $values['contact_email'] : null;
