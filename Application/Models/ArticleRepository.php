@@ -9,9 +9,11 @@ class ArticleRepository extends Repository
     function create($articleObject)
     {
         $query = $this->db->prepare(
-            'INSERT INTO posts (post_title, post_content, post_author, post_status, post_category, post_date, post_type) VALUES (:title, :content, :author, :status, :category, CURRENT_DATE, "article")'
+            'INSERT INTO posts (post_title, post_name, post_content, post_author, post_status, post_category, post_date, post_type) VALUES (:title, :name, :content, :author, :status, :category, CURRENT_DATE, "article")'
         );
         $query->bindValue(':title', $articleObject->title());
+        $name = str_replace(' ', '-', $articleObject->title());
+        $query->bindValue(':name', $name);
         $query->bindValue(':content', $articleObject->content());
         $query->bindValue(':author', $articleObject->author()->id());
         $query->bindValue(':status', $articleObject->status());
