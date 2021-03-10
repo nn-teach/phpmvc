@@ -34,7 +34,7 @@ Class Frontend {
         //puis les passer à la view
 
         $article_repository = new \Application\Models\ArticleRepository(); //on instancie un repository
-        $donnees_posts = $article_repository->all(); //on récupère les données depuis la base de données
+        $donnees_posts = $article_repository->all(null,"published"); //on récupère les données depuis la base de données
 
         $posts_array = array(); 
         foreach($donnees_posts as $donnees_post) {
@@ -86,7 +86,7 @@ Class Frontend {
         //puis le passer à une view
         /***********************************************/
         $article_repository = new \Application\Models\ArticleRepository(); //on instancie un repository
-        $donnees_posts = $article_repository->all($category); //on récupère les données depuis la base de données
+        $donnees_posts = $article_repository->all($category,"published"); //on récupère les données depuis la base de données
 
         $posts_array = array(); 
         foreach($donnees_posts as $donnees_post) {

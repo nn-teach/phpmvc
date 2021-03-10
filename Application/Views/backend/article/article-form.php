@@ -13,6 +13,9 @@ if (isset($this->data['article']) && $this->data['article'] != "") {
     <h2 class="subheader">
       <?php if($article) {
           echo "Modifier l'article : ".$article->name();
+          echo ' <a href="?admin=true&type=article&action=delete&id='.$article->id().'">';
+          echo "DELETE";
+          echo "</a>";
       } else {
           echo "Nouvel Article";
       }   

@@ -81,10 +81,11 @@ class ArticleRepository extends Repository
 
     }
 
-    function all($category = null)
+    function all($category = null,$status = null)
     {
         $query = 'SELECT * FROM posts WHERE post_type="article"';
         if ($category != null) $query .= ' AND  post_category="'.$category.'"';
+        if ($status != null) $query .= ' AND  post_status="'.$status.'"';
         
         $statement = $this->db->prepare($query);
         /* $statement = $this->db->prepare('SELECT * FROM posts WHERE post_type="article"'); */
