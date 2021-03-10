@@ -60,8 +60,30 @@ class ArticleRepository extends Repository
         return $statement->fetch();
     }
 
-    function update()
+    function update($articleObject)
     {
+        /* var_dump($articleObject);die; */
+        /* print_r('UPDATE posts SET post_title=:title, post_name=:name, post_content=:content, post_author=:author, post_status=:status, post_category=:category, post_date=CURRENT_DATE, post_type="article" WHERE id="'. $articleObject->id() . '"');die; */
+        $query = $this->db->prepare(
+            'UPDATE posts SET post_title=:title, post_name=:name, post_content=:content, post_author=:author, post_status=:status, post_category=:category, post_date=CURRENT_DATE, post_type="article" WHERE id="'. $articleObject->id() . '"');
+
+        $query->bindValue(':title', $articleObject->title());
+        $name = str_replace(' ', '-', $articleObject->title());
+        $query->bindValue(':name', $name);
+        $query->bindValue(':content', $articleObject->content());
+        $query->bindValue(':author', $articleObject->author()->id());
+        $query->bindValue(':status', $articleObject->status());
+        $query->bindValue(':category', $articleObject->category());
+
+        
+        try {
+            $query->execute();
+        } catch (\Throwable $e) {
+            echo "Query failed: " . $e->getMessage();
+            return false;
+        }
+        
+        return $this->db->lastInsertId();
     }
 
     

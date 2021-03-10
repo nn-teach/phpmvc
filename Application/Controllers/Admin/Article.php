@@ -36,6 +36,9 @@ Class Article {
                     case "delete":
                         $this->view->setVar('message', "L'article ".$messages['id']." a bien été supprimé");
                         break;
+                    case "update":
+                        $this->view->setVar('message', "L'article ".$messages['id']." a bien été modifié");
+                        break;
                     default:
                         $this->view->setVar('message', "L'action a bien été effectuée");
                         break;
@@ -132,7 +135,8 @@ Class Article {
                 $article = new \Application\Models\Article($_POST);
 
                 $articleRepository = new \Application\Models\ArticleRepository();
-                $id_inserted = $articleRepository->create($article);
+                $articleRepository->update($article);
+                $id_inserted = $article->id();
             }
             else {
                 $this->view->setVar('errors', "Une erreur s'est produite");
@@ -145,7 +149,7 @@ Class Article {
             /* $redirect_url = BASE_URL.'?admin=true&type=article&action=index&status=success&id='.$id_inserted;
              * header("Location: {$redirect_url}");
              * exit; */
-            $messages = ['status'=>'success','action'=>'create','id'=>$id_inserted]; 
+            $messages = ['status'=>'success','action'=>'update','id'=>$id_inserted]; 
             $this->index($messages);
         }
 

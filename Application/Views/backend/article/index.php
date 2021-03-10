@@ -25,6 +25,7 @@ include dirname(__DIR__).'/message.php';
         <th>auteur</th>
         <th>categorie</th>     
         <th>date</th>
+        <th>status</th>
         <th>actions</th>
       </tr>
     </thead>
@@ -54,6 +55,9 @@ include dirname(__DIR__).'/message.php';
          echo "</td>";
          echo "<td>";
          echo $article->date();
+         echo "</td>";
+         echo "<td>";
+         echo $article->status();
          echo "</td>";
          echo "<td>";
          echo '<a href="?admin=true&type=article&action=delete&id='.$article->id().'">';

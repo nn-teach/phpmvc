@@ -22,6 +22,7 @@ if (isset($this->data['article']) && $this->data['article'] != "") {
       ?>
     </h2>
     <form action="?admin=true&type=article&action=<?php echo $action ?>" method="post">
+      <input type="hidden" name="id" value="<?php echo $article ? $article->id() : "" ?>">
       <input type="text" name="post_title" value="<?php echo $article ? $article->title() : "" ?>" placeholder="Titre">
       <input type="text" name="post_category" value="<?php echo $article ? $article->category() : "" ?>" placeholder="Category">
       <textarea cols="30" id="content" value="" name="post_content" rows="10"><?php echo $article ? $article->title() : "Ici le contenu de votre article" ?></textarea>
@@ -30,8 +31,9 @@ if (isset($this->data['article']) && $this->data['article'] != "") {
         <option value="">--Choisir une option--</option>
                       <?php
                       foreach(STATUS as $S) {
+                          $selected = "";
                           ($article && $article->status() == $S) ? $selected = "selected" : "";                  
-                          echo '<option value="'.$S.'" '.$selected.'">'.$S.'</option>"';
+                          echo '<option value="'.$S.'" '.$selected.'>'.$S.'</option>';
                       }
                       ?>
         <!-- <option value="draft" <?php echo ($article && $article->status() == "draft") ? "selected" : "" ?>>Brouillon</option>
