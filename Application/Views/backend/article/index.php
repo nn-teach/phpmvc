@@ -36,7 +36,7 @@ include dirname(__DIR__).'/message.php';
      {
          echo "<tr>";
          echo "<td>";
-         echo '<a href="?admin=true&type=article&action=edit&id='.$article->id().'">';
+         echo '<a href="?admin=true&type=article&action=update&id='.$article->id().'">';
          echo $article->id();
          echo "</a>";
          echo "</td>";
@@ -58,6 +58,9 @@ include dirname(__DIR__).'/message.php';
          echo "<td>";
          echo '<a href="?admin=true&type=article&action=delete&id='.$article->id().'">';
          echo "DELETE";
+         echo "</a>";
+         echo '<a href="?admin=true&type=article&action=update&id='.$article->id().'">';
+         echo " / EDIT";
          echo "</a>";
          echo "</td>";
          echo "</tr>";

@@ -45,6 +45,21 @@ class ArticleRepository extends Repository
         return $statement->fetch();
     }
 
+    function readId($id)
+    {
+        $statement = $this->db->prepare('SELECT * FROM posts WHERE post_type="article" AND id="' . $id . '"');
+
+        try {
+
+            $statement->execute();
+        } catch (\PDOException $e) {
+            echo "Statement failed: " . $e->getMessage();
+            return false;
+        }
+
+        return $statement->fetch();
+    }
+
     function update()
     {
     }

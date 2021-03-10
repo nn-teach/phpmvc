@@ -23,6 +23,8 @@ DEFINE('DB_PWD','');
 // $base_url = "http://".$_SERVER['SERVER_NAME'].dirname($_SERVER["REQUEST_URI"].'?').'/';
 $base_url = '/';
 DEFINE('BASE_URL',$base_url);
+$available_status = ['draft','published','trash'];
+DEFINE('STATUS', $available_status);
 
 
 /**
