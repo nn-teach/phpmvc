@@ -24,7 +24,7 @@ class PageRepository extends Repository
 
       $statement->execute();
     
-    } catch (PDOException $e) {
+    } catch (\PDOException $e) {
       echo "Statement failed: " . $e->getMessage();
       return false;
     }
