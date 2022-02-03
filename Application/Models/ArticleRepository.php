@@ -35,5 +35,16 @@ class ArticleRepository extends Repository
 
   function all($categories = array())
   {
+        $statement = $this->db->prepare('SELECT * FROM posts WHERE post_type="article"');
+
+        try {
+
+            $statement->execute();
+        } catch (\PDOException $e) {
+            echo "Statement failed: " . $e->getMessage();
+            return false;
+        }
+
+        return $statement->fetchAll();
   }
 }
