@@ -26,13 +26,17 @@ Class Frontend {
 
 
         //Autre exemple pour passer des données à la View
-        /***********************************************/
-        //À compléter
-        //On doit récupérer les articles depuis la base de données et les initialiser
-        //puis les passer à la view
-        /***********************************************/
-        $posts = ['un article', 'un autre article']; //ceci devrait être remplacer par des articles récupérés depuis la base de données
-        $this->view->setVar('posts', $posts);
+        //Exemple de récupération de tous les articles en base de données
+        $article_repository = new \Application\Models\ArticleRepository(); //on instancie un repository
+        $donnees_articles = $article_repository->all(); //on récupère les données depuis la base de données
+        // print_r($donnees_articles);die;
+
+        $articles = [];
+        foreach ($donnees_articles as $donnee_dun_article) {
+          $articles[] = new \Application\Models\Article($donnee_dun_article);
+        }
+
+        $this->view->setVar('articles', $articles); // -> dans ma vue, ce sera dispnible à $this->data['articles']
 
         //On donne le nom de la vue que l'on veut appeler
         $this->view->setVar('view', 'frontend/accueil');
